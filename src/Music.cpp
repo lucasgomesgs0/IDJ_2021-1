@@ -18,7 +18,7 @@ Music::~Music()
     Mix_FreeMusic(music);
 }
 
-void Music::Play(int times = -1)
+void Music::Play(int times)
 {
     if (music == nullptr)
     {
