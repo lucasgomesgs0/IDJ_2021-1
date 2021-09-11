@@ -1,5 +1,7 @@
 #include "Rect.h"
 
+Rect::Rect() {}
+
 Rect::Rect(float x, float y, float w, float h)
 {
     this->x = x;
@@ -16,7 +18,7 @@ float Rect::Distance(Rect &a, Rect &b)
 {
     Vec2 v1 = a.Center();
     Vec2 v2 = b.Center();
-    
+
     return Vec2::Distance(v1, v2);
 }
 

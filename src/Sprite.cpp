@@ -3,12 +3,12 @@
 
 #include <iostream>
 
-Sprite::Sprite()
+Sprite::Sprite(GameObject& associated) : Component(associated)
 {
     texture = nullptr;
 }
 
-Sprite::Sprite(std::string file)
+Sprite::Sprite(GameObject& associated, std::string file) : Component(associated)
 {
     texture = nullptr;
 
@@ -58,14 +58,14 @@ void Sprite::SetClip(int x, int y, int w, int h)
     clipRect.h = h;
 }
 
-void Sprite::Render(int x, int y)
+void Sprite::Render()
 {
     SDL_Rect *dstRect = new SDL_Rect();
 
-    dstRect->x = x;
-    dstRect->y = y;
-    dstRect->w = clipRect.w;
-    dstRect->h = clipRect.h;
+    dstRect->x = associated.box.x;
+    dstRect->y = associated.box.y;
+    dstRect->w = associated.box.w;
+    dstRect->h = associated.box.h;
 
     Game &instance = Game::GetInstance();
     SDL_RenderCopy(instance.GetRenderer(), texture, &clipRect, dstRect);
