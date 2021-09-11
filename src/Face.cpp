@@ -1,6 +1,8 @@
 #include <string.h>
+#include <memory>
 
 #include "Face.h"
+#include "Sound.h"
 
 Face::Face(GameObject &associated) : Component(associated)
 {
@@ -13,6 +15,11 @@ void Face::Damage(int damage)
 
     if (hitPoints <= 0)
     {
+        std::unique_ptr<Component> sound = associated.GetComponent("Sound");
+        if (sound != nullptr)
+        {
+            ((Sound *)sound.get())->Play(1);
+        }
         associated.RequestDelete();
     }
 }

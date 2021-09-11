@@ -9,10 +9,10 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-    for (auto it = components.begin(); it != components.end(); it++)
-    {
-        delete *it;
-    }
+    // for (auto it = components.begin(); it != components.end(); it++)
+    // {
+    //     delete it;
+    // }
     components.clear();
 }
 
@@ -42,23 +42,28 @@ void GameObject::RequestDelete()
     isDead = true;
 }
 
-void GameObject::AddComponent(Component *cpt)
+void GameObject::AddComponent(std::unique_ptr<Component> cpt)
 {
-    components.push_back(cpt);
+    components.emplace_back(std::move(cpt));
 }
 
-void GameObject::RemoveComponent(Component *cpt)
+void GameObject::RemoveComponent(std::unique_ptr<Component> cpt)
 {
-    std::remove(components.begin(), components.end(), cpt);
+    for (size_t i = 0; i < components.size(); i++){
+		if (components[i] == cpt) {
+			components.erase(components.begin() + i);
+			break;
+		}
+	}
 }
 
-Component *GameObject::GetComponent(std::string type)
+std::unique_ptr<Component> GameObject::GetComponent(std::string type)
 {
     for (auto it = components.begin(); it != components.end(); it++)
     {
         if ((*it)->Is(type))
         {
-            return *it;
+            return std::move(*it);
         }
     }
     return nullptr;

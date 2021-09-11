@@ -7,6 +7,8 @@
 #define INCLUDE_SDL_TTF
 #include "SDL_include.h"
 
+#include <string>
+
 #include "State.h"
 
 class Game

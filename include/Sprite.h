@@ -2,8 +2,10 @@
 #define SPRITE_H
 
 #define INCLUDE_SDL
-
 #include "SDL_include.h"
+
+#include <string>
+
 #include "Component.h"
 
 class Sprite : public Component
@@ -20,10 +22,13 @@ public:
     ~Sprite();
     void Open(std::string file);
     void SetClip(int x, int y, int w, int h);
-    void Render();
     int GetWidth();
     int GetHeight();
     bool IsOpen();
+
+    void Update(float dt);
+    void Render();
+    bool Is(std::string type);
 };
 
 #endif

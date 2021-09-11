@@ -5,6 +5,8 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 
+#include <string>
+
 class Music
 {
 private:

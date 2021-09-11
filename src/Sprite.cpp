@@ -2,13 +2,14 @@
 #include "Game.h"
 
 #include <iostream>
+#include <string.h>
 
-Sprite::Sprite(GameObject& associated) : Component(associated)
+Sprite::Sprite(GameObject &associated) : Component(associated)
 {
     texture = nullptr;
 }
 
-Sprite::Sprite(GameObject& associated, std::string file) : Component(associated)
+Sprite::Sprite(GameObject &associated, std::string file) : Component(associated)
 {
     texture = nullptr;
 
@@ -84,4 +85,11 @@ int Sprite::GetHeight()
 bool Sprite::IsOpen()
 {
     return texture != nullptr;
+}
+
+void Sprite::Update(float dt) {}
+
+bool Sprite::Is(std::string type)
+{
+    return strcmp(type.c_str(), "Sprite") == 0;
 }

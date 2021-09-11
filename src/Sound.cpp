@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 
 #include "Sound.h"
 
@@ -19,7 +20,6 @@ Sound::~Sound()
         Mix_HaltChannel(channel);
         Mix_FreeChunk(chunk);
     }
-    
 }
 
 void Sound::Play(int times)
@@ -56,4 +56,13 @@ void Sound::Open(std::string file)
         std::cout << "Unable to load the sound: " << file.c_str() << std::endl;
         std::cout << "Error: " << Mix_GetError() << std::endl;
     }
+}
+
+void Sound::Update(float dt) {}
+
+void Sound::Render() {}
+
+bool Sound::Is(std::string type)
+{
+    return strcmp(type.c_str(), "Sound") == 0;
 }
