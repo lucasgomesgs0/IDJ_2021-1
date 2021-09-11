@@ -22,7 +22,7 @@ public:
     void RequestDelete();
     void AddComponent(Component *cpt);
     void RemoveComponent(Component *cpt);
-    Component *GetCompoennt(std::string type);
+    Component *GetComponent(std::string type);
 };
 
 #endif

@@ -52,7 +52,7 @@ void GameObject::RemoveComponent(Component *cpt)
     std::remove(components.begin(), components.end(), cpt);
 }
 
-Component *GameObject::GetCompoennt(std::string type)
+Component *GameObject::GetComponent(std::string type)
 {
     for (auto it = components.begin(); it != components.end(); it++)
     {
