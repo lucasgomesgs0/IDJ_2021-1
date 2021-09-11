@@ -1,6 +1,9 @@
 #include "Game.h"
 #include "State.h"
 
+#include <cstdlib>
+#include <ctime>
+
 Game *Game::instance;
 
 Game::Game(std::string title, int width, int height)
@@ -56,6 +59,8 @@ Game::Game(std::string title, int width, int height)
 	}
 
 	state = new State();
+
+	srand(time(NULL));
 }
 
 Game::~Game()
@@ -103,7 +108,7 @@ Game &Game::GetInstance()
 		return *instance;
 	}
 
-	instance = new Game("test", 1, 2);
+	instance = new Game("Lucas Gomes Silva - 16/0133505", 1024, 600);
 
 	return *instance;
 }

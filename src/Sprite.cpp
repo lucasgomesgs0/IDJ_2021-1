@@ -65,8 +65,11 @@ void Sprite::Render()
 
     dstRect->x = associated.box.x;
     dstRect->y = associated.box.y;
-    dstRect->w = associated.box.w;
-    dstRect->h = associated.box.h;
+    dstRect->w = clipRect.w;
+    dstRect->h = clipRect.h;
+
+    associated.box.w = clipRect.w;
+    associated.box.h = clipRect.h;
 
     Game &instance = Game::GetInstance();
     SDL_RenderCopy(instance.GetRenderer(), texture, &clipRect, dstRect);
