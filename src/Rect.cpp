@@ -28,7 +28,7 @@ Vec2 Rect::Center()
     return v;
 }
 
-bool Rect::IsInside(const Vec2 &a)
+bool Rect::Contains(const Vec2 &a)
 {
     if ((a.x >= x) && (a.x <= x + w) && (a.y >= y) && (a.y <= y + h))
     {

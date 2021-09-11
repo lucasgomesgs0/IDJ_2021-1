@@ -44,6 +44,15 @@ void Vec2::Rotate(float rad)
     this->y = y;
 }
 
+Vec2 Vec2::GetRotated(float rad)
+{
+    Vec2 v;
+	v.x = x;
+	v.y = y;
+	v.Rotate(rad);
+	return v;
+}
+
 Vec2 Vec2::operator+(const Vec2 &a)
 {
     return Vec2(x + a.x, y + a.y);

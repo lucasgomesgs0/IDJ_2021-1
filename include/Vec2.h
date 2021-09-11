@@ -22,6 +22,7 @@ public:
     float Angle();
     void Normalize();
     void Rotate(float rad);
+    Vec2 GetRotated(float rad);
 
     Vec2 operator+(const Vec2 &a);
     Vec2 operator-(const Vec2 &a);

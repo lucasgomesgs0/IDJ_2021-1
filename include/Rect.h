@@ -16,7 +16,7 @@ public:
     static float Distance(Rect &a, Rect &b);
 
     Vec2 Center();
-    bool IsInside(const Vec2 &a);
+    bool Contains(const Vec2 &a);
 
     Rect operator+(const Vec2 &a);
 };
