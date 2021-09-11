@@ -9,8 +9,6 @@
 
 #include "State.h"
 
-#include <string>
-
 class Game
 {
 private:

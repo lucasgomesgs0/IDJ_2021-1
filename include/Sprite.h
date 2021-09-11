@@ -6,8 +6,6 @@
 #include "SDL_include.h"
 #include "Component.h"
 
-#include <string>
-
 class Sprite : public Component
 {
 private:

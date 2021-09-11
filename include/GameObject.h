@@ -2,7 +2,6 @@
 #define GAMEOBJECT_H
 
 #include <vector>
-#include <string>
 
 #include "Component.h"
 #include "Rect.h"
