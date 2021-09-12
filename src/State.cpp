@@ -4,17 +4,27 @@
 #include "Sprite.h"
 #include "Sound.h"
 #include "Face.h"
+#include "TileSet.h"
+#include "TileMap.h"
 
 State::State()
 {
     quitRequested = false;
 
-    std::unique_ptr<GameObject> go = std::unique_ptr<GameObject>(new GameObject());
-	std::unique_ptr<Sprite> sprite = std::unique_ptr<Sprite>(new Sprite(*go, "assets/img/ocean.jpg"));
-	go->box.x = 0;
-	go->box.y = 0;
-	go->AddComponent(std::move(sprite));
-	objectArray.emplace_back(std::move(go));
+    std::unique_ptr<GameObject> go_background = std::unique_ptr<GameObject>(new GameObject());
+    std::unique_ptr<Sprite> sprite = std::unique_ptr<Sprite>(new Sprite(*go_background, "assets/img/ocean.jpg"));
+    go_background->box.x = 0;
+    go_background->box.y = 0;
+    go_background->AddComponent(std::move(sprite));
+    objectArray.emplace_back(std::move(go_background));
+
+    std::unique_ptr<GameObject> go_tileMap = std::unique_ptr<GameObject>(new GameObject());
+    go_tileMap->box.x = 0;
+    go_tileMap->box.y = 0;
+    std::unique_ptr<TileSet> tileSet = std::unique_ptr<TileSet>(new TileSet(*go_tileMap, 64, 64, "assets/img/tileset.png"));
+    std::unique_ptr<TileMap> tileMap = std::unique_ptr<TileMap>(new TileMap(*go_tileMap, "assets/map/tileMap.txt", tileSet.get()));
+    go_tileMap->AddComponent(std::move(tileMap));
+    objectArray.emplace_back(std::move(go_tileMap));
 
     music.Open("assets/audio/stageState.ogg");
     music.Play(-1);
