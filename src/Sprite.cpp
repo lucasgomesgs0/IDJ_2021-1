@@ -25,7 +25,7 @@ void Sprite::Open(std::string file)
 
     if (texture == nullptr)
     {
-        std::cout << "Unable to load the texture: " << file.c_str() << std::endl;
+        std::cout << "Unable to load the texture: " << file << std::endl;
         std::cout << "Error: " << IMG_GetError() << std::endl;
     }
     else
@@ -37,6 +37,9 @@ void Sprite::Open(std::string file)
         }
 
         Sprite::SetClip(0, 0, width, height);
+
+        associated.box.w = width;
+        associated.box.h = height;
     }
 }
 
@@ -61,9 +64,6 @@ void Sprite::Render(int x, int y)
     dstRect.y = y;
     dstRect.w = clipRect.w;
     dstRect.h = clipRect.h;
-
-    associated.box.w = clipRect.w;
-    associated.box.h = clipRect.h;
 
     Game &instance = Game::GetInstance();
     SDL_RenderCopy(instance.GetRenderer(), texture, &clipRect, &dstRect);

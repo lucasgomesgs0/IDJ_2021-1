@@ -14,15 +14,15 @@ TileSet::TileSet(GameObject &associated, int tileWidth, int tileHeight, std::str
     }
     else
     {
-        std::cout << "Unable to load the tileset: " << file.c_str() << std::endl;
+        std::cout << "Unable to load the tileset: " << file << std::endl;
         columns = 0;
         rows = 0;
     }
 }
 
-void TileSet::RenderTile(unsigned index, float x, float y)
+void TileSet::RenderTile(unsigned index, int x, int y)
 {
-    if (index <= (unsigned)rows * columns - 1)
+    if (index < (unsigned)rows * columns - 1)
     {
         tileSet.SetClip((index % columns) * tileWidth, (index / columns) * tileHeight, tileWidth, tileHeight);
         tileSet.Render(x, y);

@@ -1,5 +1,6 @@
 #include <string.h>
 #include <iostream>
+#include <fstream>
 
 #include "TileMap.h"
 
@@ -12,7 +13,7 @@ TileMap::TileMap(GameObject &associated, std::string file, TileSet *tileSet) : C
 void TileMap::Load(std::string file)
 {
     int buffer;
-    FILE* mapFile = fopen(file.c_str(), "r");
+    FILE *mapFile = fopen(file.c_str(), "r");
 
     if (mapFile != NULL)
     {
@@ -25,7 +26,7 @@ void TileMap::Load(std::string file)
                 for (int k = 0; k < mapWidth; k++)
                 {
                     fscanf(mapFile, "%d,", &buffer);
-                    tileMatrix.push_back(buffer);
+                    tileMatrix.push_back(buffer - 1);
                 }
             }
         }
@@ -34,7 +35,7 @@ void TileMap::Load(std::string file)
     }
     else
     {
-        std::cout << "Unable to load the tilemap: " << file.c_str() << std::endl;
+        std::cout << "Unable to load the tilemap: " << file << std::endl;
     }
 }
 
@@ -62,7 +63,8 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY)
     {
         for (int j = 0; j < mapWidth; j++)
         {
-            tileSet->RenderTile(tileMatrix[j + i * mapWidth + layer * mapWidth * mapHeight], i * tileSet->GetTileWidth() + cameraX, j + tileSet->GetTileHeight() + cameraY);
+
+            tileSet->RenderTile(tileMatrix[j + i * mapWidth + layer * mapWidth * mapHeight], j * tileSet->GetTileWidth() + cameraX, i * tileSet->GetTileHeight() + cameraY);
         }
     }
 }

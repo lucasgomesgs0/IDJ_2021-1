@@ -49,7 +49,7 @@ void Music::Open(std::string file)
 
     if (music == nullptr)
     {
-        std::cout << "Unable to load the music: " << file.c_str() << std::endl;
+        std::cout << "Unable to load the music: " << file << std::endl;
         std::cout << "Error: " << Mix_GetError() << std::endl;
     }
 }
