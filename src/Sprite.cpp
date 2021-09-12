@@ -13,7 +13,7 @@ Sprite::Sprite(GameObject &associated, std::string file) : Component(associated)
 {
     texture = nullptr;
 
-    Sprite::Open(file);
+    Open(file);
 }
 
 Sprite::~Sprite()

@@ -67,13 +67,12 @@ Game::~Game()
 {
 	delete state;
 
-	Mix_CloseAudio();
-	Mix_Quit();
-
-	IMG_Quit();
-
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+
+	Mix_CloseAudio();
+	Mix_Quit();
+	IMG_Quit();
 
 	SDL_Quit();
 }

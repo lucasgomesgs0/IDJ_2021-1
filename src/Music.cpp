@@ -10,7 +10,7 @@ Music::Music()
 Music::Music(std::string file)
 {
     music = nullptr;
-    Music::Open(file);
+    Open(file);
 }
 
 Music::~Music()

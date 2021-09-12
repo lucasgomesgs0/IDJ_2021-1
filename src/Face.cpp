@@ -15,10 +15,10 @@ void Face::Damage(int damage)
 
     if (hitPoints <= 0)
     {
-        std::unique_ptr<Component> sound = associated.GetComponent("Sound");
+        Sound *sound = (Sound *)associated.GetComponent("Sound").get();
         if (sound != nullptr)
         {
-            ((Sound *)sound.get())->Play(1);
+            sound->Play(1);
         }
         associated.RequestDelete();
     }

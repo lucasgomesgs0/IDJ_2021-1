@@ -5,8 +5,9 @@
 #include <string>
 #include <memory>
 
-#include "Component.h"
 #include "Rect.h"
+
+class Component;
 
 class GameObject
 {
@@ -27,4 +28,5 @@ public:
     std::unique_ptr<Component> GetComponent(std::string type);
 };
 
+#include "Component.h"
 #endif

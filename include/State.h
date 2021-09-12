@@ -13,6 +13,9 @@ private:
 	Music music;
 	bool quitRequested;
 	std::vector<std::unique_ptr<GameObject>> objectArray;
+
+	void Input();
+	void AddObject(int mouseX, int mouseY);
 public:
 	State();
 	~State();
@@ -20,8 +23,6 @@ public:
 	void LoadAssets();
 	void Update(float dt);
 	void Render();
-	void Input();
-	void AddObject(int mouseX, int mouseY);
 };
 
 #endif

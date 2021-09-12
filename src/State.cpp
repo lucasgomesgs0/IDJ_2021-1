@@ -11,8 +11,8 @@ State::State()
 
     std::unique_ptr<GameObject> go = std::unique_ptr<GameObject>(new GameObject());
 	std::unique_ptr<Sprite> sprite = std::unique_ptr<Sprite>(new Sprite(*go, "assets/img/ocean.jpg"));
-	go->box.w = 0;
-	go->box.h = 0;
+	go->box.x = 0;
+	go->box.y = 0;
 	go->AddComponent(std::move(sprite));
 	objectArray.emplace_back(std::move(go));
 
@@ -49,9 +49,9 @@ void State::Update(float dt)
 
 void State::Render()
 {
-    for (auto it = objectArray.begin(); it != objectArray.end(); it++)
+    for (size_t i = 0; i < objectArray.size(); i++)
     {
-        (*it)->Render();
+        objectArray[i]->Render();
     }
 }
 
@@ -66,8 +66,8 @@ void State::AddObject(int mouseX, int mouseY)
 
     std::unique_ptr<Sprite> sprite = std::unique_ptr<Sprite>(new Sprite(*go, "assets/img/penguinface.png"));
 
-    go->box.x = mouseX - sprite->GetWidth()/2;
-    go->box.y = mouseY - sprite->GetHeight()/2;
+    go->box.x = mouseX - sprite->GetWidth() / 2;
+    go->box.y = mouseY - sprite->GetHeight() / 2;
 
     go->AddComponent(std::move(sprite));
 
