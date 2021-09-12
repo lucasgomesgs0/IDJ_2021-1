@@ -61,18 +61,23 @@ void Sprite::SetClip(int x, int y, int w, int h)
 
 void Sprite::Render()
 {
-    SDL_Rect *dstRect = new SDL_Rect();
+    Render(associated.box.x, associated.box.y);
+}
 
-    dstRect->x = associated.box.x;
-    dstRect->y = associated.box.y;
-    dstRect->w = clipRect.w;
-    dstRect->h = clipRect.h;
+void Sprite::Render(int x, int y)
+{
+    SDL_Rect dstRect;
+
+    dstRect.x = x;
+    dstRect.y = y;
+    dstRect.w = clipRect.w;
+    dstRect.h = clipRect.h;
 
     associated.box.w = clipRect.w;
     associated.box.h = clipRect.h;
 
     Game &instance = Game::GetInstance();
-    SDL_RenderCopy(instance.GetRenderer(), texture, &clipRect, dstRect);
+    SDL_RenderCopy(instance.GetRenderer(), texture, &clipRect, &dstRect);
 }
 
 int Sprite::GetWidth()
