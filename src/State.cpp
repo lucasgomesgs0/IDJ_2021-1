@@ -12,18 +12,18 @@ State::State()
     quitRequested = false;
 
     std::unique_ptr<GameObject> go_background = std::unique_ptr<GameObject>(new GameObject());
-    std::unique_ptr<Sprite> sprite = std::unique_ptr<Sprite>(new Sprite(*go_background, "assets/img/ocean.jpg"));
+    Sprite* sprite = new Sprite(*go_background, "assets/img/ocean.jpg");
     go_background->box.x = 0;
     go_background->box.y = 0;
-    go_background->AddComponent(std::move(sprite));
+    go_background->AddComponent(sprite);
     objectArray.emplace_back(std::move(go_background));
 
     std::unique_ptr<GameObject> go_tileMap = std::unique_ptr<GameObject>(new GameObject());
     go_tileMap->box.x = 0;
     go_tileMap->box.y = 0;
-    std::unique_ptr<TileSet> tileSet = std::unique_ptr<TileSet>(new TileSet(*go_tileMap, 64, 64, "assets/img/tileset.png"));
-    std::unique_ptr<TileMap> tileMap = std::unique_ptr<TileMap>(new TileMap(*go_tileMap, "assets/map/tileMap.txt", tileSet.get()));
-    go_tileMap->AddComponent(std::move(tileMap));
+    TileSet* tileSet = new TileSet(*go_tileMap, 64, 64, "assets/img/tileset.png");
+    TileMap* tileMap = new TileMap(*go_tileMap, "assets/map/tileMap.txt", tileSet);
+    go_tileMap->AddComponent(tileMap);
     objectArray.emplace_back(std::move(go_tileMap));
 
     music.Open("assets/audio/stageState.ogg");
@@ -42,7 +42,7 @@ void State::LoadAssets()
 void State::Update(float dt)
 {
     Input();
-
+    
     for (size_t i = 0; i < objectArray.size(); i++)
     {
         objectArray[i]->Update(dt);
@@ -74,18 +74,18 @@ void State::AddObject(int mouseX, int mouseY)
 {
     std::unique_ptr<GameObject> go = std::unique_ptr<GameObject>(new GameObject());
 
-    std::unique_ptr<Sprite> sprite = std::unique_ptr<Sprite>(new Sprite(*go, "assets/img/penguinface.png"));
+    Sprite* sprite = new Sprite(*go, "assets/img/penguinface.png");
 
     go->box.x = mouseX - sprite->GetWidth() / 2;
     go->box.y = mouseY - sprite->GetHeight() / 2;
 
-    go->AddComponent(std::move(sprite));
+    go->AddComponent(sprite);
 
-    std::unique_ptr<Sound> sound = std::unique_ptr<Sound>(new Sound(*go, "assets/audio/boom.wav"));
-    go->AddComponent(std::move(sound));
+    Sound* sound = new Sound(*go, "assets/audio/boom.wav");
+    go->AddComponent(sound);
 
-    std::unique_ptr<Face> face = std::unique_ptr<Face>(new Face(*go));
-    go->AddComponent(std::move(face));
+    Face* face = new Face(*go);
+    go->AddComponent(face);
 
     objectArray.emplace_back(std::move(go));
 }
@@ -125,7 +125,7 @@ void State::Input()
 
                 if (go->box.Contains({(float)mouseX, (float)mouseY}))
                 {
-                    Face *face = (Face *)go->GetComponent("Face").get();
+                    Face *face = (Face *)go->GetComponent("Face");
                     if (nullptr != face)
                     {
                         // Aplica dano

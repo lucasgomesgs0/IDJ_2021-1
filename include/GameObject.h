@@ -23,9 +23,9 @@ public:
     void Render();
     bool IsDead();
     void RequestDelete();
-    void AddComponent(std::unique_ptr<Component> cpt);
-    void RemoveComponent(std::unique_ptr<Component> cpt);
-    std::unique_ptr<Component> GetComponent(std::string type);
+    void AddComponent(Component* cpt);
+    void RemoveComponent(Component* cpt);
+    Component* GetComponent(std::string type);
 };
 
 #include "Component.h"

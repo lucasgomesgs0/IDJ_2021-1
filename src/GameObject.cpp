@@ -1,7 +1,7 @@
 #include <algorithm>
 
 #include "GameObject.h"
-
+#include <iostream>
 GameObject::GameObject()
 {
     isDead = false;
@@ -9,9 +9,13 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-    for (auto it = components.end(); it != components.begin(); it--)
+    for (auto it = components.begin(); it != components.end(); it++)
     {
-        delete it->get();
+        // when iterate from end to begin, the program break when use reset
+        // release without return to any variable will cause leak, using reset wil break the program
+        // using reset when iterate from begin to end, the sound doesn't plays
+
+        Component* aux = it->release();
     }
     components.clear();
 }
@@ -42,16 +46,16 @@ void GameObject::RequestDelete()
     isDead = true;
 }
 
-void GameObject::AddComponent(std::unique_ptr<Component> cpt)
+void GameObject::AddComponent(Component *cpt)
 {
     components.emplace_back(std::move(cpt));
 }
 
-void GameObject::RemoveComponent(std::unique_ptr<Component> cpt)
+void GameObject::RemoveComponent(Component *cpt)
 {
     for (size_t i = 0; i < components.size(); i++)
     {
-        if (components[i] == cpt)
+        if (components[i].get() == cpt)
         {
             components.erase(components.begin() + i);
             break;
@@ -59,13 +63,13 @@ void GameObject::RemoveComponent(std::unique_ptr<Component> cpt)
     }
 }
 
-std::unique_ptr<Component> GameObject::GetComponent(std::string type)
+Component *GameObject::GetComponent(std::string type)
 {
     for (auto it = components.begin(); it != components.end(); it++)
     {
         if ((*it)->Is(type))
         {
-            return (std::unique_ptr<Component>)it->get();
+            return (*it).get();
         }
     }
     return nullptr;

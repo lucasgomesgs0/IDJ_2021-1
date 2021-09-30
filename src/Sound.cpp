@@ -31,7 +31,7 @@ void Sound::Play(int times)
     }
     else
     {
-        channel = Mix_PlayChannel(-1, chunk, times);
+        channel = Mix_PlayChannel(-1, chunk, times - 1);
         if (channel == -1)
         {
             SDL_Log("Unable to play the music: %s", Mix_GetError());

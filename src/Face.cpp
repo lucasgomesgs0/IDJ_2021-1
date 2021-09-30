@@ -15,7 +15,7 @@ void Face::Damage(int damage)
 
     if (hitPoints <= 0)
     {
-        Sound *sound = (Sound *)associated.GetComponent("Sound").get();
+        Sound *sound = (Sound *)associated.GetComponent("Sound");
         if (sound != nullptr)
         {
             sound->Play(1);
