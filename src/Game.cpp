@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "State.h"
 #include "Resources.h"
+#include "InputManager.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -79,9 +80,13 @@ Game::~Game()
 }
 
 void Game::Run()
-{
+{	
+	InputManager& inputManager = InputManager::GetInstance();
+
 	while (!state->QuitRequested())
 	{
+		inputManager.Update();
+
 		state->Update(1);
 		state->Render();
 
@@ -89,10 +94,10 @@ void Game::Run()
 
 		SDL_Delay(33);
 	}
+
 	Resources::ClearImages();
 	Resources::ClearMusics();
 	Resources::ClearSounds();
-
 }
 
 SDL_Renderer *Game::GetRenderer()
