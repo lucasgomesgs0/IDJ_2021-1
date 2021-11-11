@@ -109,20 +109,6 @@ run:
 exec: $(EXEC_PATH)
 	$(EXEC_PATH)
 
-help:
-ifeq ($(OS), Windows_NT)
-	@echo.
-endif
-	@echo Available targets:
-	@echo - release:	Builds the release version
-	@echo - debug:		Builds the debug version
-	@echo - clean: 		Cleans the generated files
-	@echo - folders:	Generates project directories
-	@echo - help:		Shows this help
-ifeq ($(OS), Windows_NT)
-	@echo.
-endif
-
 .SECONDEXPANSION:
 -include $$(DEP_FILES)
 
