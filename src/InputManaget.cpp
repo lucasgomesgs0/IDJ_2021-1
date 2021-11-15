@@ -52,13 +52,13 @@ void InputManager::Update()
             if (event.type == SDL_MOUSEBUTTONDOWN)
             {
                 mouseState[event.button.button] = true;
-                mouseUpdate[event.key.keysym.sym] = updateCounter;
+                mouseUpdate[event.button.button] = updateCounter;
             }
 
             if (event.type == SDL_MOUSEBUTTONUP)
             {
                 mouseState[event.button.button] = false;
-                mouseUpdate[event.key.keysym.sym] = updateCounter;
+                mouseUpdate[event.button.button] = updateCounter;
             }
 
             if (event.type == SDL_QUIT)
