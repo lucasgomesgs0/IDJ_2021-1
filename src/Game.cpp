@@ -10,6 +10,9 @@ Game *Game::instance;
 
 Game::Game(std::string title, int width, int height)
 {
+	dt = 0.0;
+	frameStart = SDL_GetTicks();
+
 	if (instance != nullptr)
 	{
 		SDL_Log("Class has already been instantiated");
@@ -80,14 +83,17 @@ Game::~Game()
 }
 
 void Game::Run()
-{	
-	InputManager& inputManager = InputManager::GetInstance();
+{
+	InputManager &inputManager = InputManager::GetInstance();
 
 	while (!state->QuitRequested())
 	{
+		CalculateDeltaTime();
+		frameStart = SDL_GetTicks();
+
 		inputManager.Update();
 
-		state->Update(1);
+		state->Update(dt);
 		state->Render();
 
 		SDL_RenderPresent(renderer);
@@ -120,4 +126,14 @@ Game &Game::GetInstance()
 	instance = new Game("Lucas Gomes Silva - 16/0133505", 1024, 600);
 
 	return *instance;
+}
+
+void Game::CalculateDeltaTime()
+{
+	dt = (float)(SDL_GetTicks() - frameStart) / 1000;
+}
+
+float Game::GetDeltaTime()
+{
+	return dt;
 }
