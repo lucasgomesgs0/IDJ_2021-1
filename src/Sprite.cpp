@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "Game.h"
 #include "Resources.h"
+#include "Camera.h"
 
 #include <iostream>
 #include <string.h>
@@ -53,7 +54,7 @@ void Sprite::SetClip(int x, int y, int w, int h)
 
 void Sprite::Render()
 {
-    Render(associated.box.x, associated.box.y);
+    Render(associated.box.x - Camera::pos.x, associated.box.y - Camera::pos.y);
 }
 
 void Sprite::Render(int x, int y)

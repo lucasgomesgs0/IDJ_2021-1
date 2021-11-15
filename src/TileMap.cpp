@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "TileMap.h"
+#include "Camera.h"
 
 TileMap::TileMap(GameObject &associated, std::string file, TileSet *tileSet) : Component(associated)
 {
@@ -53,7 +54,7 @@ void TileMap::Render()
 {
     for (int i = 0; i < mapDepth; i++)
     {
-        RenderLayer(i, associated.box.x, associated.box.y);
+        RenderLayer(i, Camera::pos.x, Camera::pos.y);
     }
 }
 

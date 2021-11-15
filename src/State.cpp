@@ -7,6 +7,7 @@
 #include "TileSet.h"
 #include "TileMap.h"
 #include "InputManager.h"
+#include "Camera.h"
 
 State::State()
 {
@@ -43,6 +44,8 @@ void State::LoadAssets()
 void State::Update(float dt)
 {
     InputManager& inputManager = InputManager::GetInstance();
+
+    Camera::Update(dt);
 
     if (inputManager.QuitRequested() || inputManager.KeyPress(ESCAPE_KEY)) {
 		quitRequested = true;
@@ -86,8 +89,8 @@ void State::AddObject(int mouseX, int mouseY)
 
     Sprite* sprite = new Sprite(*go, "assets/img/penguinface.png");
 
-    go->box.x = mouseX - sprite->GetWidth() / 2;
-    go->box.y = mouseY - sprite->GetHeight() / 2;
+    go->box.x = mouseX - sprite->GetWidth() / 2 + Camera::pos.x;
+    go->box.y = mouseY - sprite->GetHeight() / 2 + Camera::pos.y;
 
     go->AddComponent(sprite);
 
