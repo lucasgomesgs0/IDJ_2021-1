@@ -28,11 +28,11 @@ void Camera::Update(float dt)
 
         if (inputManager.IsKeyDown(D_KEY))
         {
-            speed.x = 100;
+            speed.x = SPEED;
         }
         else if (inputManager.IsKeyDown(A_KEY))
         {
-            speed.x = -100;
+            speed.x = -SPEED;
         }
         else
         {
@@ -41,11 +41,11 @@ void Camera::Update(float dt)
 
         if (inputManager.IsKeyDown(W_KEY))
         {
-            speed.y = 100;
+            speed.y = -SPEED;
         }
         else if (inputManager.IsKeyDown(S_KEY))
         {
-            speed.y = -100;
+            speed.y =SPEED;
         }
         else
         {

@@ -8,6 +8,7 @@
 #include "TileMap.h"
 #include "InputManager.h"
 #include "Camera.h"
+#include "CameraFollower.h"
 
 State::State()
 {
@@ -15,9 +16,11 @@ State::State()
 
     std::unique_ptr<GameObject> go_background = std::unique_ptr<GameObject>(new GameObject());
     Sprite* sprite = new Sprite(*go_background, "assets/img/ocean.jpg");
+	CameraFollower *cameraFollower = new CameraFollower(*go_background);
     go_background->box.x = 0;
     go_background->box.y = 0;
     go_background->AddComponent(sprite);
+    go_background->AddComponent(cameraFollower);
     objectArray.emplace_back(std::move(go_background));
 
     std::unique_ptr<GameObject> go_tileMap = std::unique_ptr<GameObject>(new GameObject());

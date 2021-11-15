@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "Vec2.h"
 
+#define SPEED 150
+
 class Camera
 {
 private:
